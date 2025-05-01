@@ -8,10 +8,10 @@
     <title>How to play</title>
 </head>
 
-<body>
+<div>
     <header class="header">
         <div class="header__logo">
-            <img src="./assets/img/chess.com_logo.png" alt="Chess.com Logo">
+            <img src="./assets/img/logo.png" alt="Chess.com Logo" style="width: 100%;">
         </div>
         <nav class="header__navbar">
             <a href="#" class="header__navbar-item"><li>Home</li></a>
@@ -21,25 +21,96 @@
             <a href="#" class="header__navbar-item"><li>Contact</li></a>
         </nav>
     </header>
-    <div class="container">
-        <div class="container__main">
-            <div class="container__heading">
-                <h1 class="container__heading-text">Pawn</h1>
-            </div>
-            <div class="container__information">
-                <div class="container__information-img">
-                    <img src="./assets/img/chess_piece__white_pawn.jpg" alt="">
-                    <p class="container__information-name">Pawn</p>
+    <div id="content">
+        <div id="content-body">
+            <div id="three-col-container">
+                <div class="left-sidebar">
+                    <a class="left-sidebar-item active" href="/" id="blog-tab">
+                    <span class="sidebar-icon"></span>
+                    <span class="sidebar-text">News</span>
+                    </a>
+                    <a class="left-sidebar-item " href="/feed/comments/" id="comment-tab">
+                    <span class="sidebar-icon"></span>
+                    <span class="sidebar-text">Comment</span>
+                    </a>
+                    <a class="left-sidebar-item " href="/feed/tickets/" id="ticket-tab">
+                    <span class="sidebar-icon"></span>
+                    <span class="sidebar-text">Ticket</span>
+                    </a>
+                    <a class="left-sidebar-item " href="#" id="event-tab">
+                    <span class="sidebar-icon"></span>
+                    <span class="sidebar-text">Events</span>
+                    </a>
                 </div>
-                <div class="container__information-detail">
-                    <div class="container__information-description">The pawn (♙, ♟) is the most numerous and weakest piece in the game of chess. It may move one vacant square directly forward, it may move two vacant squares directly forward on its first move, and it may capture one square diagonally forward. Each player begins a game with eight pawns, one on each square of their second rank. The white pawns start on a2 through h2; the black pawns start on a7 through h7.</div>
-                    <div class="container__information-third">
-                        <img src="./assets/img/Pawn_Chessboard.png" class="container__information-img"></img>
-                        <img src="./assets/img/Pawn_Chessboard.png" class="container__information-img"></img>
-                        <img src="./assets/img/Pawn_Chessboard4802.png" class="container__information-img"></img>
-                    </div>
-                </div>
             </div>
+            <div class="middle-right-content ">
+                <style>
+                  .user-gravatar {
+                    display: inline-block;
+                    padding-right: 15px;
+                    padding-top: 8px;
+                    width: 135px;
+                  }
+                
+                  .user-gravatar img {
+                    width: 135px;
+                    height: 135px;
+                    display: block;
+                    border-radius: 6px;
+                  }
+                
+                  .recently-attempted, .recommended-problems {
+                    display: inline-block;
+                  }
+                
+                  .recently-attempted ul {
+                    list-style: none;
+                    padding-left: 1em;
+                    padding-right: .5em;
+                    margin: 0.2em;
+                  }
+                
+                  .recently-attempted h4, .recommended-problems h4 {
+                    font-weight: 500;
+                  }
+                </style> 
+                <style>
+                    .no-clarifications-message {
+                      font-style: italic;
+                      text-align: center;
+                    }
+                
+                    .org-logo {
+                      height: 2em;
+                      width: 2em;
+                      margin-right: 0.5em;
+                    }
+                
+                    .organization-row:last-child {
+                      border-bottom: none;
+                    }
+                </style>
+                <div class="middle-content">
+                    <section class="sticky blog-box pre-expand-blog" style="cursor: pointer;">
+                        <div style="margin-bottom: 0.5em">
+                        <span class="post-content-header time">
+                        <span class="user-img" style="width: 1.5em; height: 1.5em">
+                        </span>
+                        <span class="post-authors"><span class="rating rate-master admin ">
+                        <a href="/user/Flower_On_Stone">
+                        Flower_On_Stone
+                        </a>
+                
+                        </div>
+                        <div class="blog-description">
+                        <div class="summary content-description">
+                        
+                        <div class="show-more"> ...More </div>
+                        </div>
+                        <div class="actionbar-box">
+                        </div>
+                        </section>
+                </div>
         </div>
     </div>
     <footer class="footer">
