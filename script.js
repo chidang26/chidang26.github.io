@@ -1,7 +1,7 @@
 const board = document.getElementById('board');
 const statusDiv = document.getElementById('status');
 let cells = ['', '', '', '', '', '', '', '', ''];
-let currentPlayer = 'X';
+let currentPlayer = 'X'; // X là người, O là máy
 let gameActive = true;
 
 const winConditions = [
@@ -24,19 +24,55 @@ function createBoard() {
 }
 
 function handleCellClick(index) {
-    if (cells[index] !== '' || !gameActive) return;
+    // Chỉ cho phép click nếu ô trống, game đang chạy, và đang là lượt của người chơi (X)
+    if (cells[index] !== '' || !gameActive || currentPlayer !== 'X') return;
 
-    cells[index] = currentPlayer;
-    checkWin();
+    // Lượt của người chơi
+    makeMove(index, 'X');
 
+    // Nếu game chưa kết thúc, nhường lượt cho máy (O)
     if (gameActive) {
-        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-        statusDiv.innerText = `Lượt của: ${currentPlayer}`;
+        statusDiv.innerText = 'Máy đang suy nghĩ... 🤖';
+        // Đợi 0.5 giây (500ms) rồi máy mới đánh
+        setTimeout(computerMove, 500);
     }
-    createBoard();
 }
 
-function checkWin() {
+function computerMove() {
+    if (!gameActive) return;
+
+    // Tìm vị trí các ô còn trống
+    let emptyCells = [];
+    for (let i = 0; i < cells.length; i++) {
+        if (cells[i] === '') {
+            emptyCells.push(i);
+        }
+    }
+
+    // Chọn ngẫu nhiên 1 vị trí trong danh sách các ô trống
+    if (emptyCells.length > 0) {
+        const randomIndex = Math.floor(Math.random() * emptyCells.length);
+        const move = emptyCells[randomIndex];
+
+        // Lượt của máy
+        makeMove(move, 'O');
+    }
+}
+
+function makeMove(index, player) {
+    cells[index] = player;
+    createBoard();
+    checkWin(player);
+
+    if (gameActive) {
+        currentPlayer = player === 'X' ? 'O' : 'X';
+        if (currentPlayer === 'X') {
+            statusDiv.innerText = `Lượt của: Bạn (X)`;
+        }
+    }
+}
+
+function checkWin(player) {
     let roundWon = false;
     for (let i = 0; i < winConditions.length; i++) {
         const [a, b, c] = winConditions[i];
@@ -47,7 +83,7 @@ function checkWin() {
     }
 
     if (roundWon) {
-        statusDiv.innerText = `Người chơi ${currentPlayer} đã thắng! 🎉`;
+        statusDiv.innerText = player === 'X' ? 'Bạn đã thắng! 🎉' : 'Máy đã thắng! 💻';
         gameActive = false;
         return;
     }
@@ -63,9 +99,10 @@ function resetGame() {
     cells = ['', '', '', '', '', '', '', '', ''];
     currentPlayer = 'X';
     gameActive = true;
-    statusDiv.innerText = `Lượt của: X`;
+    statusDiv.innerText = `Lượt của: Bạn (X)`;
     createBoard();
 }
 
-// Khởi tạo bảng khi load file script
+// Khởi tạo bảng lần đầu tiên
 createBoard();
+statusDiv.innerText = `Lượt của: Bạn (X)`;
