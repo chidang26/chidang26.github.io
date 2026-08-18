@@ -1,123 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>How to play</title>
-    <!-- redeploy-trigger: 2026-08-18T00:00:00Z - trigger: redeploy pages -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9930877452644358"
-     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="./script.js" defer></script>
+  <title>How to play</title>
+  <!-- redeploy-trigger: 2026-08-18T00:00:00Z - trigger: redeploy pages -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9930877452644358"
+    crossorigin="anonymous"></script>
 </head>
 
-<div>
-    <header class="header">
-        <div class="header__logo">
-            <img src="./assets/img/logo.png" alt="Chess.com Logo" style="width: 100%;">
-        </div>
-        <nav class="header__navbar">
-            <a href="#" class="header__navbar-item"><li>Home</li></a>
-            <a href="#" class="header__navbar-item"><li>Infor</li></a>
-            <a href="#" class="header__navbar-item"><li>About</li></a>
-            <a href="#" class="header__navbar-item"><li>Profile</li></a>
-            <a href="#" class="header__navbar-item"><li>Contact</li></a>
-        </nav>
-    </header>
-    <div id="content">
-        <div id="content-body">
-            <div id="three-col-container">
-                <div class="left-sidebar">
-                    <a class="left-sidebar-item active" href="/" id="blog-tab">
-                    <span class="sidebar-icon"></span>
-                    <span class="sidebar-text">News</span>
-                    </a>
-                    <a class="left-sidebar-item " href="/feed/comments/" id="comment-tab">
-                    <span class="sidebar-icon"></span>
-                    <span class="sidebar-text">Comment</span>
-                    </a>
-                    <a class="left-sidebar-item " href="/feed/tickets/" id="ticket-tab">
-                    <span class="sidebar-icon"></span>
-                    <span class="sidebar-text">Ticket</span>
-                    </a>
-                    <a class="left-sidebar-item " href="#" id="event-tab">
-                    <span class="sidebar-icon"></span>
-                    <span class="sidebar-text">Events</span>
-                    </a>
-                </div>
-            </div>
-            <div class="middle-right-content ">
-                <style>
-                  .user-gravatar {
-                    display: inline-block;
-                    padding-right: 15px;
-                    padding-top: 8px;
-                    width: 135px;
-                  }
-                
-                  .user-gravatar img {
-                    width: 135px;
-                    height: 135px;
-                    display: block;
-                    border-radius: 6px;
-                  }
-                
-                  .recently-attempted, .recommended-problems {
-                    display: inline-block;
-                  }
-                
-                  .recently-attempted ul {
-                    list-style: none;
-                    padding-left: 1em;
-                    padding-right: .5em;
-                    margin: 0.2em;
-                  }
-                
-                  .recently-attempted h4, .recommended-problems h4 {
-                    font-weight: 500;
-                  }
-                </style> 
-                <style>
-                    .no-clarifications-message {
-                      font-style: italic;
-                      text-align: center;
-                    }
-                
-                    .org-logo {
-                      height: 2em;
-                      width: 2em;
-                      margin-right: 0.5em;
-                    }
-                
-                    .organization-row:last-child {
-                      border-bottom: none;
-                    }
-                </style>
-                <div class="middle-content">
-                    <section class="sticky blog-box pre-expand-blog" style="cursor: pointer;">
-                        <div style="margin-bottom: 0.5em">
-                        <span class="post-content-header time">
-                        <span class="user-img" style="width: 1.5em; height: 1.5em">
-                        </span>
-                        <span class="post-authors"><span class="rating rate-master admin ">
-                        <a href="/user/Flower_On_Stone">
-                        Flower_On_Stone
-                        </a>
-                
-                        </div>
-                        <div class="blog-description">
-                        <div class="summary content-description">
-                        
-                        <div class="show-more"> ...More </div>
-                        </div>
-                        <div class="actionbar-box">
-                        </div>
-                        </section>
-                </div>
-        </div>
-    </div>
-    <footer class="footer">
-        
-    </footer>
+<body>
+  <h1>Cờ Caro (Tic-Tac-Toe)</h1>
+  <div class="status" id="status">Lượt của: X</div>
+  <div class="board" id="board"></div>
+  <button onclick="resetGame()">Chơi lại</button>
+
+  <h1>chidang26_test</h1>
 </body>
+
 </html>
