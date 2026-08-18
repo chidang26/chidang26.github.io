@@ -52,6 +52,8 @@ h1 {
     font-size: 24px;
     font-weight: bold;
     color: #555;
+    height: 30px;
+    /* Cố định chiều cao để chữ không bị giật lên xuống */
 }
 
 button {
