@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Công cụ Upload nội bộ lên GitHub</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; margin-top: 50px; background-color: #f4f4f9; }
+        .upload-box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 400px; text-align: center; }
+        input[type="file"] { margin: 20px 0; }
+        button { padding: 10px 20px; background-color: #2ed573; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #26af5f; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        #status { margin-top: 15px; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+
+    <div class="upload-box">
+        <h2>Tải tài liệu lên chidang26.github.io</h2>
+        <input type="file" id="fileInput" accept=".pdf">
+        <br>
+        <button id="uploadBtn" onclick="uploadToGitHub()">Tải lên ngay</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const GITHUB_TOKEN = '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';
+        const REPO_OWNER = 'chidang26';
+        const REPO_NAME = 'chidang26.github.io';
+        const FOLDER_NAME = 'pdf';
+        // ============================================
+
+        async function uploadToGitHub() {
+            const fileInput = document.getElementById('fileInput');
+            const statusDiv = document.getElementById('status');
+            const uploadBtn = document.getElementById('uploadBtn');
+
+            if (fileInput.files.length === 0) {
+                alert('Vui lòng chọn một file trước!');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const fileName = file.name;
+            statusDiv.innerText = "Đang xử lý file... ⏳";
+            uploadBtn.disabled = true;
+
+            // Đọc file và chuyển thành dạng Base64
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onload = async function () {
+                // Tách bỏ phần tiền tố "data:application/pdf;base64," chỉ lấy mã base64
+                const base64Content = reader.result.split(',')[1];
+
+                // Tạo đường dẫn file (Ví dụ: pdf/a.pdf)
+                const filePath = `${FOLDER_NAME}/${fileName}`;
+                const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`;
+
+                try {
+                    statusDiv.innerText = "Đang đẩy lên GitHub... 🚀";
+
+                    // Gửi yêu cầu đẩy file lên GitHub qua API
+                    const response = await fetch(apiUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${GITHUB_TOKEN}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: `Tự động tải lên file: ${fileName}`, // Lời nhắn khi commit
+                            content: base64Content
+                        })
+                    });
+
+                    if (response.ok) {
+                        statusDiv.innerHTML = `<span style="color: #2ed573;">Thành công! File đã nằm trên web của bạn. 🎉</span>`;
+                    } else {
+                        const errorData = await response.json();
+                        statusDiv.innerHTML = `<span style="color: #ff4757;">Lỗi: File này có thể đã tồn tại, hoặc mã Token sai.</span>`;
+                        console.error(errorData);
+                    }
+                } catch (error) {
+                    statusDiv.innerHTML = `<span style="color: #ff4757;">Lỗi kết nối mạng.</span>`;
+                    console.error(error);
+                } finally {
+                    uploadBtn.disabled = false;
+                }
+            };
+        }
+    </script>
+</body>
+</html>
