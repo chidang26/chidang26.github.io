@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="./music_style.css">
+  <script src="../script.js" defer></script>
+  <script src="../theme.js" defer></script>
+  <title>MUSIC</title>
+</head>
+
+<body>
+    <button id="themeToggle" class="theme-btn">🌙 Giao diện Tối</button>
+    <a href="../index.html" class="back-btn">⬅ Quay lại Trang chủ</a>
+
+    <h1>🎵 Trạm Phát Nhạc</h1>
+
+    <!-- Khung phát nhạc chính -->
+    <div class="music-player">
+        <div class="cd-thumb" id="cdThumb"></div>
+        <h2 id="trackTitle">Tên bài hát</h2>
+        <p id="trackSinger">Ca sĩ</p>
+
+        <audio id="audio"></audio>
+
+        <div class="controls">
+            <button id="prevBtn">⏮</button>
+            <button id="playBtn">▶️</button>
+            <button id="nextBtn">⏭</button>
+        </div>
+    </div>
+
+    <!-- Danh sách bài hát -->
+    <div class="playlist" id="playlist">
+        <!-- Javascript sẽ tự động điền danh sách vào đây -->
+    </div>
+
+    <script src="music.js" defer></script>
+</body>
+</html>
