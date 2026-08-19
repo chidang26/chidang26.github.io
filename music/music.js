@@ -17,7 +17,7 @@ for (let i = 1; i <= tongSoBaiHat; i++)
         name: `Bản nhạc số ${i}`,
         singer: "Thư giãn", // Bạn có thể đổi tên ca sĩ chung ở đây
         path: `music${i}.mp3`, // File trên GitHub phải đặt tên chuẩn: nhac-1.mp3, nhac-2.mp3...
-        image: "https://cdn-icons-png.flaticon.com/512/3011/3011236.png"
+        image: "https://upload.wikimedia.org/wikipedia/commons/2/29/Compact_Disc.png?utm_source=vi.wikipedia.org&utm_campaign=index&utm_content=original"
     });
 }
 let currentIndex = 0;
