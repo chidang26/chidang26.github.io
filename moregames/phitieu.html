@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../script.js" defer></script>
+  <script src="../theme.js" defer></script>
+  <title>Tic Tac Toe</title>
+  <!-- redeploy-trigger: 2026-08-18T00:00:00Z - trigger: redeploy pages -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9930877452644358"
+    crossorigin="anonymous"></script>
+<script src="//code.tidio.co/25ia7eccd3tb8k3ymphv3apw3pivqsuf.js" async></script>
+</head>
+
+
+<body>
+    <button id="themeToggle" class="theme-btn">🌙 Giao diện Tối</button>
+    <a href="../index.html" class="back-btn">⬅ Quay lại Trang chủ</a>
+    <h1>Ném Phi Tiêu 🎯</h1>
+
+    <div id="gameArea">
+        <div class="crosshair-x" id="lineX"></div>
+        <div class="crosshair-y" id="lineY"></div>
+        <div class="dart-hole" id="dart"></div>
+    </div>
+
+    <div>
+        <button class="action-btn" id="stopBtn" onclick="stopCrosshair()">Dừng thanh Ngang</button>
+        <button class="action-btn" onclick="location.reload()" style="background-color: #ff4757;">Chơi lại</button>
+    </div>
+    <div id="result">Cố gắng ngắm vào hồng tâm nhé!</div>
+
+    <script>
+        const lineX = document.getElementById("lineX");
+        const lineY = document.getElementById("lineY");
+        const dart = document.getElementById("dart");
+        const stopBtn = document.getElementById("stopBtn");
+        const resultDiv = document.getElementById("result");
+
+        let posX = 0; let posY = 0;
+        let directionX = 1; let directionY = 1;
+        let speed = 4;
+        let step = 1; // 1: Đang chạy trục X, 2: Đang chạy trục Y, 3: Xong
+        let animationId;
+
+        // Bắt đầu chạy trục ngang (X)
+        function moveX() {
+            posX += speed * directionX;
+            if (posX >= 300 || posX <= 0) directionX *= -1;
+            lineX.style.left = posX + "px";
+            animationId = requestAnimationFrame(moveX);
+        }
+
+        // Bắt đầu chạy trục dọc (Y)
+        function moveY() {
+            posY += speed * directionY;
+            if (posY >= 300 || posY <= 0) directionY *= -1;
+            lineY.style.top = posY + "px";
+            animationId = requestAnimationFrame(moveY);
+        }
+
+        function stopCrosshair() {
+            if (step === 1) {
+                // Dừng X, chuyển sang Y
+                cancelAnimationFrame(animationId);
+                lineY.style.display = "block";
+                stopBtn.innerText = "Ném Phi Tiêu!";
+                step = 2;
+                moveY();
+            } else if (step === 2) {
+                // Dừng Y và tính điểm
+                cancelAnimationFrame(animationId);
+                stopBtn.disabled = true;
+                stopBtn.style.backgroundColor = "#ccc";
+
+                // Hiển thị lỗ cắm phi tiêu
+                dart.style.left = posX + "px";
+                dart.style.top = posY + "px";
+                dart.style.display = "block";
+
+                calculateScore();
+            }
+        }
+
+        function calculateScore() {
+            // Tính khoảng cách từ điểm dừng đến tâm (150, 150)
+            const centerX = 150; const centerY = 150;
+            const distance = Math.sqrt(Math.pow(posX - centerX, 2) + Math.pow(posY - centerY, 2));
+
+            let score = 0;
+            if (distance <= 15) score = 100; // Hồng tâm
+            else if (distance <= 45) score = 50;
+            else if (distance <= 75) score = 30;
+            else if (distance <= 105) score = 10;
+            else if (distance <= 135) score = 5;
+
+            if (score === 100) {
+                resultDiv.innerHTML = "Tuyệt đỉnh! Trúng hồng tâm! <span style='color:red;'>+100 Điểm</span> 🎉";
+            } else if (score > 0) {
+                resultDiv.innerHTML = `Khá lắm! Bạn nhận được <span style='color:#1e90ff;'>+${score} Điểm</span>`;
+            } else {
+                resultDiv.innerHTML = "Trượt mất rồi! 😭";
+            }
+        }
+
+        // Bắt đầu game
+        moveX();
+    </script>
+</body>
+</html>

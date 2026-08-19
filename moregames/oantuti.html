@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../script.js" defer></script>
+  <script src="../theme.js" defer></script>
+  <title>Tic Tac Toe</title>
+  <!-- redeploy-trigger: 2026-08-18T00:00:00Z - trigger: redeploy pages -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9930877452644358"
+    crossorigin="anonymous"></script>
+<script src="//code.tidio.co/25ia7eccd3tb8k3ymphv3apw3pivqsuf.js" async></script>
+</head>
+
+
+<body>
+    <button id="themeToggle" class="theme-btn">🌙 Giao diện Tối</button>
+    <a href="../index.html" class="back-btn">⬅ Quay lại Trang chủ</a>
+    <h1>Oẳn Tù Tì vs Máy ✊✌️✋</h1>
+
+    <div class="choices">
+        <button class="choice-btn" onclick="playGame('Búa ✊')">✊</button>
+        <button class="choice-btn" onclick="playGame('Kéo ✌️')">✌️</button>
+        <button class="choice-btn" onclick="playGame('Bao ✋')">✋</button>
+    </div>
+
+    <div id="result-box">
+        Hãy chọn 1 hình để bắt đầu!
+    </div>
+
+    <script>
+        function playGame(userChoice) {
+            const choices = ['Búa ✊', 'Kéo ✌️', 'Bao ✋'];
+            const compChoice = choices[Math.floor(Math.random() * 3)];
+            let result = "";
+
+            if (userChoice === compChoice) {
+                result = "Hòa nhau! 🤝";
+            } else if (
+                (userChoice === 'Búa ✊' && compChoice === 'Kéo ✌️') ||
+                (userChoice === 'Kéo ✌️' && compChoice === 'Bao ✋') ||
+                (userChoice === 'Bao ✋' && compChoice === 'Búa ✊')
+            ) {
+                result = "<span style='color:#2ed573;'>Bạn thắng! 🎉</span>";
+            } else {
+                result = "<span style='color:#ff4757;'>Máy thắng! 💻</span>";
+            }
+
+            document.getElementById('result-box').innerHTML = `
+                Bạn: <strong>${userChoice}</strong> <br><br>
+                Máy: <strong>${compChoice}</strong> <br><br>
+                <strong>${result}</strong>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,3 +1,6 @@
+/* =========================================
+   STYLE HỆ THỐNG (DÙNG CHUNG CHO MỌI TRANG)
+========================================== */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -5,114 +8,89 @@ body {
     align-items: center;
     background-color: #f0f4f8;
     margin-top: 50px;
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển màu mượt */
 }
 
-h1 {
-    color: #333;
-}
+h1, h2, #score, #result { color: #333; }
 
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 5px;
-    background-color: #333;
-    padding: 5px;
-    border-radius: 8px;
-}
-
-.cell {
-    width: 100px;
-    height: 100px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-}
-
-.cell:hover {
-    background-color: #e9e9e9;
-}
-
-.cell.x {
-    color: #ff4757;
-}
-
-.cell.o {
-    color: #1e90ff;
-}
-
-.status {
-    margin: 20px 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: #555;
-    height: 30px;
-    /* Cố định chiều cao để chữ không bị giật lên xuống */
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: #2ed573;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-}
-
-button:hover {
-    background-color: #26af5f;
-}
-
-
-/* Nút bấm đổi giao diện đặt ở góc phải */
+/* Nút đổi giao diện Sáng/Tối */
 .theme-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    cursor: pointer;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: 0.3s;
+    position: absolute; top: 20px; right: 20px;
+    padding: 10px 15px; cursor: pointer;
+    background-color: #333; color: white;
+    border: none; border-radius: 5px; font-weight: bold; transition: 0.3s;
 }
 
-/* Các màu sắc khi bật chế độ tối (thêm class dark-mode vào body) */
-body.dark-mode {
-    background-color: #1a1a2e;
+/* Nút quay lại trang chủ */
+.back-btn {
+    padding: 10px 15px; background-color: #ff4757; color: white;
+    text-decoration: none; border-radius: 5px; font-weight: bold; margin-bottom: 20px;
 }
+.back-btn:hover { background-color: #ff6b81; }
 
-body.dark-mode h1,
-body.dark-mode .status {
-    color: #e9e9e9;
+/* Các nút bấm hành động chung */
+button:not(.theme-btn):not(.choice-btn):not(.game-card) {
+    padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer;
+    background-color: #2ed573; color: white; border: none; border-radius: 5px;
+    transition: 0.2s;
 }
+button:not(.theme-btn):not(.choice-btn):hover { background-color: #26af5f; }
 
-body.dark-mode .board {
-    background-color: #16213e;
-}
+/* =========================================
+   GIAO DIỆN TỐI (DARK MODE)
+========================================== */
+body.dark-mode { background-color: #1a1a2e; color: #e9e9e9; }
+body.dark-mode h1, body.dark-mode h2, body.dark-mode #score, body.dark-mode #result { color: #e9e9e9; }
+body.dark-mode .theme-btn { background-color: #f0f4f8; color: #333; }
 
-body.dark-mode .cell {
-    background-color: #0f3460; /* Màu nền ô cờ tối */
-}
+/* Dark mode cho Cờ Caro */
+body.dark-mode .board { background-color: #16213e; }
+body.dark-mode .cell { background-color: #0f3460; }
+body.dark-mode .cell:hover { background-color: #1a4a85; }
+body.dark-mode .status { color: #e9e9e9; }
 
-body.dark-mode .cell:hover {
-    background-color: #1a4a85;
-}
+/* Dark mode cho Danh sách game */
+body.dark-mode .divider { border-color: #444; }
+body.dark-mode .game-card { background-color: #ff7f50; color: #fff; }
+body.dark-mode .game-card:hover { background-color: #ff6348; }
 
-/* Đổi màu nút bấm khi ở chế độ tối */
-body.dark-mode .theme-btn {
-    background-color: #f0f4f8;
-    color: #333;
-}
+/* Dark mode cho Oẳn tù tì */
+body.dark-mode .choice-btn { background-color: #0f3460; }
+body.dark-mode .choice-btn:hover { background-color: #1a4a85; }
+body.dark-mode #result-box { background-color: #16213e; color: #e9e9e9; }
+
+/* =========================================
+   STYLE RIÊNG CHO TỪNG GAME
+========================================== */
+/* Cờ Caro */
+.board { display: grid; grid-template-columns: repeat(3, 100px); grid-template-rows: repeat(3, 100px); gap: 5px; background-color: #333; padding: 5px; border-radius: 8px; }
+.cell { width: 100px; height: 100px; background-color: white; display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.cell:hover { background-color: #e9e9e9; }
+.cell.x { color: #ff4757; }
+.cell.o { color: #1e90ff; }
+.status { margin: 20px 0; font-size: 24px; font-weight: bold; height: 30px; }
+
+/* Danh sách game trang chủ */
+.divider { width: 80%; border: 1px solid #ccc; margin: 30px 0; }
+.game-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
+.game-card { display: inline-block; padding: 15px 20px; background-color: #ff9f43; color: white; text-decoration: none; font-size: 16px; font-weight: bold; border-radius: 8px; transition: 0.3s, transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.game-card:hover { background-color: #ee5253; transform: translateY(-3px); }
+
+/* Rắn săn mồi & Vòng quay & Phi tiêu (Canvas/Layout) */
+canvas { background-color: #333; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+#score { font-size: 24px; font-weight: bold; margin: 10px 0; }
+.wheel-container { position: relative; width: 300px; height: 300px; margin: 20px 0; }
+.pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid #ff4757; z-index: 10; }
+#wheelCanvas { border-radius: 50%; border: 5px solid #333; transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1); }
+
+/* Oẳn tù tì */
+.choices { display: flex; gap: 20px; margin: 30px 0; }
+.choice-btn { font-size: 50px; padding: 20px; border: none; border-radius: 10px; background-color: white; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.choice-btn:hover { transform: scale(1.1); background-color: #e9e9e9; }
+#result-box { font-size: 24px; text-align: center; background: white; padding: 20px 40px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); min-width: 300px; }
+
+/* Phi tiêu */
+#gameArea { position: relative; width: 300px; height: 300px; background: radial-gradient(circle, #ff4757 10%, white 10%, white 30%, #ff4757 30%, #ff4757 50%, white 50%, white 70%, #ff4757 70%, #ff4757 90%, #333 90%); border-radius: 50%; border: 5px solid #333; overflow: hidden; margin: 20px 0; }
+.crosshair-x { position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: blue; z-index: 2; }
+.crosshair-y { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: blue; z-index: 2; display: none; }
+.dart-hole { position: absolute; width: 10px; height: 10px; background: black; border-radius: 50%; z-index: 3; display: none; transform: translate(-50%, -50%);}

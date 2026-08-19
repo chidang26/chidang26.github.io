@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../script.js" defer></script>
+  <script src="../theme.js" defer></script>
+  <title>Tic Tac Toe</title>
+  <!-- redeploy-trigger: 2026-08-18T00:00:00Z - trigger: redeploy pages -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9930877452644358"
+    crossorigin="anonymous"></script>
+<script src="//code.tidio.co/25ia7eccd3tb8k3ymphv3apw3pivqsuf.js" async></script>
+</head>
+<body>
+    <button id="themeToggle" class="theme-btn">🌙 Giao diện Tối</button>
+    <a href="../index.html" class="back-btn">⬅ Quay lại Trang chủ</a>
+    <h1>Vòng Quay May Mắn 🎡</h1>
+
+    <div class="wheel-container">
+        <div class="pointer"></div>
+        <canvas id="wheelCanvas" width="300" height="300"></canvas>
+    </div>
+
+    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Quay Ngay!</button>
+    <div id="result">Nhấn nút để thử vận may!</div>
+
+    <script>
+        const canvas = document.getElementById("wheelCanvas");
+        const ctx = canvas.getContext("2d");
+        const spinBtn = document.getElementById("spinBtn");
+        const resultDiv = document.getElementById("result");
+
+        // Danh sách các ô trên vòng quay
+        const sectors = [
+            { color: "#ff4757", label: "Mất lượt" },
+            { color: "#ffa502", label: "10 Điểm" },
+            { color: "#2ed573", label: "Thêm lượt" },
+            { color: "#1e90ff", label: "50 Điểm" },
+            { color: "#a4b0be", label: "Chia đôi" },
+            { color: "#ff6348", label: "100 Điểm" }
+        ];
+
+        const numSectors = sectors.length;
+        const arc = (2 * Math.PI) / numSectors;
+        let currentRotation = 0;
+
+        // Vẽ vòng quay
+        function drawWheel() {
+            for (let i = 0; i < numSectors; i++) {
+                const angle = i * arc;
+                ctx.beginPath();
+                ctx.fillStyle = sectors[i].color;
+                ctx.moveTo(150, 150);
+                ctx.arc(150, 150, 150, angle, angle + arc);
+                ctx.fill();
+
+                // Vẽ chữ
+                ctx.save();
+                ctx.translate(150, 150);
+                ctx.rotate(angle + arc / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = "#fff";
+                ctx.font = "bold 16px Arial";
+                ctx.fillText(sectors[i].label, 130, 5);
+                ctx.restore();
+            }
+        }
+
+        drawWheel();
+
+        // Xử lý quay
+        function spinWheel() {
+            spinBtn.disabled = true;
+            resultDiv.innerText = "Đang quay... 🎲";
+
+            // Tính số vòng quay ngẫu nhiên (ít nhất 5 vòng + phần lẻ)
+            const randomDegree = Math.floor(Math.random() * 360);
+            const extraSpins = 360 * 5;
+            currentRotation += extraSpins + randomDegree;
+
+            canvas.style.transform = `rotate(${currentRotation}deg)`;
+
+            // Chờ hiệu ứng quay kết thúc (4s) rồi báo kết quả
+            setTimeout(() => {
+                // Tính toán góc thực tế sau khi quay để xác định ô trúng thưởng
+                const actualRotation = currentRotation % 360;
+                // Vị trí mũi tên đang chỉ ở góc trên cùng (270 độ / -90 độ)
+                const pointerAngle = (360 - actualRotation + 270) % 360;
+                const winningIndex = Math.floor(pointerAngle / (360 / numSectors));
+
+                resultDiv.innerText = `🎉 Kết quả: ${sectors[winningIndex].label} 🎉`;
+                spinBtn.disabled = false;
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
