@@ -72,3 +72,47 @@ button {
 button:hover {
     background-color: #26af5f;
 }
+
+
+/* Nút bấm đổi giao diện đặt ở góc phải */
+.theme-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Các màu sắc khi bật chế độ tối (thêm class dark-mode vào body) */
+body.dark-mode {
+    background-color: #1a1a2e;
+}
+
+body.dark-mode h1,
+body.dark-mode .status {
+    color: #e9e9e9;
+}
+
+body.dark-mode .board {
+    background-color: #16213e;
+}
+
+body.dark-mode .cell {
+    background-color: #0f3460; /* Màu nền ô cờ tối */
+}
+
+body.dark-mode .cell:hover {
+    background-color: #1a4a85;
+}
+
+/* Đổi màu nút bấm khi ở chế độ tối */
+body.dark-mode .theme-btn {
+    background-color: #f0f4f8;
+    color: #333;
+}
