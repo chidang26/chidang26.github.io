@@ -21,6 +21,27 @@
 <script src="https://5gvci.com/act/files/tag.min.js?z=11666801" data-cfasync="false" async></script>
 <body>
     <button id="themeToggle" class="theme-btn">🌙 Giao diện Tối</button>
+
+  <div class="converter-card">
+    <h3>🎵 Tải nhạc MP3 từ YouTube Miễn Phí</h3>
+    <p class="sub-text">Dán link video YouTube bất kỳ để chuyển thành file âm thanh tải về</p>
+    
+    <div class="input-group">
+      <input type="text" id="ytUrl" placeholder="https://www.youtube.com/watch?v=..." />
+      <button id="convertBtn">Chuyển sang MP3</button>
+    </div>
+
+    <div id="loadingStatus" class="status-box" style="display: none;">
+      <div class="spinner"></div>
+      <span>Đang xử lý âm thanh, vui lòng đợi vài giây...</span>
+    </div>
+
+    <div id="resultArea" class="result-box" style="display: none;">
+      <h4 id="videoTitle"></h4>
+      <a id="downloadBtn" href="#" target="_blank" download class="dl-btn">⬇️ Bấm vào đây để Tải MP3</a>
+    </div>
+  </div>
+  
   <h1>Cờ Caro: Bạn vs Máy</h1>
   <div class="status" id="status">Lượt của: Bạn (X)</div>
   <div class="board" id="board"></div>
