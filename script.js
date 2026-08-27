@@ -124,20 +124,6 @@ function resetGame() {
 createBoard();
 
 // convert
-const convertBtn = document.getElementById('convertBtn');
-const urlInput = document.getElementById('ytUrl');
-const statusBox = document.getElementById('loadingStatus');
-const resultArea = document.getElementById('resultArea');
-const downloadBtn = document.getElementById('downloadBtn');
-const videoTitle = document.getElementById('videoTitle');
-
-// Hàm bóc tách ID video YouTube
-function extractVideoID(url) {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-  const match = url.match(regExp);
-  return (match && match[2].length === 11) ? match[2] : null;
-}
-
 function convertVideo() {
   const url = urlInput.value.trim();
   const videoId = extractVideoID(url);
@@ -152,13 +138,13 @@ function convertVideo() {
 
   setTimeout(() => {
     statusBox.style.display = 'none';
-    videoTitle.innerText = `Sẵn sàng tải âm thanh cho Video ID: ${videoId}`;
+    videoTitle.innerText = `ID Video: ${videoId}`;
     
-    // Sử dụng gateway tải MP3 nhanh và an toàn
-    downloadBtn.href = `https://www.y2mate.com/youtube-mp3/${videoId}`;
-    downloadBtn.innerText = '⬇️ Bấm vào đây để Chuyển hướng lấy File MP3';
+    // Tạo link chuyển hướng trực tiếp qua SaveFrom (không bị lỗi DNS)
+    downloadBtn.href = `https://ssyoutube.com/watch?v=${videoId}`;
+    downloadBtn.innerText = '⬇️ Bấm để mở trang tải MP3 / MP4';
     resultArea.style.display = 'block';
-  }, 1000);
+  }, 600);
 }
 
 if (convertBtn) {
