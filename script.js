@@ -123,7 +123,7 @@ function resetGame() {
 // Khởi tạo game lần đầu khi mở web
 createBoard();
 
-
+// convert
 const convertBtn = document.getElementById('convertBtn');
 const urlInput = document.getElementById('ytUrl');
 const statusBox = document.getElementById('loadingStatus');
@@ -131,34 +131,36 @@ const resultArea = document.getElementById('resultArea');
 const downloadBtn = document.getElementById('downloadBtn');
 const videoTitle = document.getElementById('videoTitle');
 
-async function convertVideo() {
-  const url = urlInput.value.trim();
+// Hàm bóc tách ID video YouTube
+function extractVideoID(url) {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+}
 
-  if (!url || !url.includes('youtu')) {
-    alert('Vui lòng dán đúng đường dẫn video YouTube!');
+function convertVideo() {
+  const url = urlInput.value.trim();
+  const videoId = extractVideoID(url);
+
+  if (!videoId) {
+    alert('Vui lòng dán đúng đường dẫn video YouTube hợp lệ!');
     return;
   }
 
   statusBox.style.display = 'flex';
   resultArea.style.display = 'none';
 
-  try {
-    const response = await fetch(`https://api.vkrdownloader.workers.dev/server?v=${encodeURIComponent(url)}`);
-    const data = await response.json();
-
+  setTimeout(() => {
     statusBox.style.display = 'none';
-
-    if (data && data.data && data.data.downloadUrl) {
-      videoTitle.innerText = data.data.title || 'Âm thanh YouTube';
-      downloadBtn.href = data.data.downloadUrl;
-      resultArea.style.display = 'block';
-    } else {
-      window.open('https://ytmp3.nu/en/', '_blank');
-    }
-  } catch (error) {
-    statusBox.style.display = 'none';
-    window.open('https://ytmp3.nu/en/', '_blank');
-  }
+    videoTitle.innerText = `Sẵn sàng tải âm thanh cho Video ID: ${videoId}`;
+    
+    // Sử dụng gateway tải MP3 nhanh và an toàn
+    downloadBtn.href = `https://www.y2mate.com/youtube-mp3/${videoId}`;
+    downloadBtn.innerText = '⬇️ Bấm vào đây để Chuyển hướng lấy File MP3';
+    resultArea.style.display = 'block';
+  }, 1000);
 }
 
-convertBtn.addEventListener('click', convertVideo);
+if (convertBtn) {
+  convertBtn.addEventListener('click', convertVideo);
+}
