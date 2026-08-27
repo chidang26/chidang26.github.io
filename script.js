@@ -122,3 +122,43 @@ function resetGame() {
 
 // Khởi tạo game lần đầu khi mở web
 createBoard();
+
+
+const convertBtn = document.getElementById('convertBtn');
+const urlInput = document.getElementById('ytUrl');
+const statusBox = document.getElementById('loadingStatus');
+const resultArea = document.getElementById('resultArea');
+const downloadBtn = document.getElementById('downloadBtn');
+const videoTitle = document.getElementById('videoTitle');
+
+async function convertVideo() {
+  const url = urlInput.value.trim();
+
+  if (!url || !url.includes('youtu')) {
+    alert('Vui lòng dán đúng đường dẫn video YouTube!');
+    return;
+  }
+
+  statusBox.style.display = 'flex';
+  resultArea.style.display = 'none';
+
+  try {
+    const response = await fetch(`https://api.vkrdownloader.workers.dev/server?v=${encodeURIComponent(url)}`);
+    const data = await response.json();
+
+    statusBox.style.display = 'none';
+
+    if (data && data.data && data.data.downloadUrl) {
+      videoTitle.innerText = data.data.title || 'Âm thanh YouTube';
+      downloadBtn.href = data.data.downloadUrl;
+      resultArea.style.display = 'block';
+    } else {
+      window.open('https://ytmp3.nu/en/', '_blank');
+    }
+  } catch (error) {
+    statusBox.style.display = 'none';
+    window.open('https://ytmp3.nu/en/', '_blank');
+  }
+}
+
+convertBtn.addEventListener('click', convertVideo);
