@@ -124,6 +124,21 @@ function resetGame() {
 createBoard();
 
 // convert
+
+const convertBtn = document.getElementById('convertBtn');
+const urlInput = document.getElementById('ytUrl');
+const statusBox = document.getElementById('loadingStatus');
+const resultArea = document.getElementById('resultArea');
+const downloadBtn = document.getElementById('downloadBtn');
+const videoTitle = document.getElementById('videoTitle');
+
+// Hàm bóc tách ID video YouTube
+function extractVideoID(url) {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+}
+
 function convertVideo() {
   const url = urlInput.value.trim();
   const videoId = extractVideoID(url);
